@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import app from "./app";
-import config from "./config";
-import seedAdmin from "./utils/seedAdmin";
+import app from './app';
+import config from './config';
+import seedAdmin from './utils/seedAdmin';
 
 app.listen(config.port, async () => {
-  console.log(`Server running at http://localhost:${config.port}`);
-  try {
-    await seedAdmin()
-  } catch (error: any) {
-    console.error(error?.message)
-  }
+    console.log(`Server running at http://localhost:${config.port}`);
+    try {
+        await seedAdmin();
+    } catch (error: any) {
+        console.error(error?.message);
+    }
 });

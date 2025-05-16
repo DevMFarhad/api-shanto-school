@@ -1,9 +1,9 @@
 import status from 'http-status';
 import dbClient from '../../dbClient';
-import AppError from '../../utils/appError';
 import { bcryptHelpers } from '../../utils/bcryptHelpers';
 import { generateToken, ITokenPayload } from '../../utils/jwtHelpers';
 import { IChangePassword, ILoginPayload } from './auth.type';
+import AppError from '../../utils/AppError';
 
 /* ---------------<< Login User Service >>------------- */
 const loginUser = async (payload: ILoginPayload) => {

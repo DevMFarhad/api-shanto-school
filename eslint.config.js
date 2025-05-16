@@ -18,13 +18,12 @@ export default tseslint.config(
   },
   {
     rules: {
-      '@typescript-eslint/restrict-template-expressions': 'off',
-      '@typescript-eslint/no-unsafe-assignment': 'off',
-      '@typescript-eslint/no-explicit-any': 'warn',
-      '@typescript-eslint/no-unused-vars': 'warn',
-      '@typescript-eslint/require-await': 'warn',
-      '@typescript-eslint/no-unsafe-member-access': 'false',
-      // '@typescript-eslint/no-unsafe-member-access': 'warn',
+      '@typescript-eslint/restrict-template-expressions': 0,
+      '@typescript-eslint/no-unsafe-assignment': 0,
+      '@typescript-eslint/no-explicit-any': 1,
+      '@typescript-eslint/no-unused-vars': 1,
+      '@typescript-eslint/require-await': 1,
+      '@typescript-eslint/no-unsafe-member-access': 0,
     },
   },
 );

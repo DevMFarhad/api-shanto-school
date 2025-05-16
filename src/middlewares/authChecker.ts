@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { decodeToken, ITokenPayload } from '../utils/jwtHelpers';
 import { Role } from '@prisma/client';
 import dbClient from '../dbClient';
-import AppError from '../utils/appError';
+import AppError from '../utils/AppError';
 import status from 'http-status';
 
 const authChecker = (...roles: Role[]) => {

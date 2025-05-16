@@ -7,35 +7,130 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Post {
-  id       String    @id @default(auto()) @map("_id") @db.ObjectId
-  slug     String    @unique
-  title    String
-  body     String
-  author   User      @relation(fields: [authorId], references: [id])
-  authorId String    @db.ObjectId
-  comments Comment[]
+/**
+ * ----------> ALL ENUM HERE <----------
+ */
+enum Role {
+  ADMIN
+  TEACHER
+  STUDENT
 }
+
+enum Section {
+  A
+  B
+  C
+  D
+  E
+  NA
+}
+
+enum Group {
+  Science
+  Commerce
+  Arts
+  NA
+}
+
+/**
+ * ----------> ALL DB Model Here <----------
+ */
 
 model User {
-  id      String   @id @default(auto()) @map("_id") @db.ObjectId
-  email   String   @unique
-  name    String?
-  address Address?
-  posts   Post[]
+  id                 String   @id @map("_id")
+  password           String
+  role               Role
+  hasPasswordChanged Boolean  @default(false)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  Student Student[]
+  Teacher Teacher[]
+
+  @@map("users")
 }
 
-model Comment {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
-  comment String
-  post    Post   @relation(fields: [postId], references: [id])
-  postId  String @db.ObjectId
+model Student {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String   @unique
+  classId    String   @db.ObjectId
+  name       String
+  email      String   @unique
+  phone      String   @unique
+  fatherName String
+  motherName String
+  dob        DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  // relational fields
+  user  User  @relation(fields: [userId], references: [id])
+  class Class @relation(fields: [classId], references: [id])
+
+  @@map("students")
 }
 
-// Address is an embedded document
-type Address {
-  street String
-  city   String
-  state  String
-  zip    String
+model Teacher {
+  id             String           @id @default(auto()) @map("_id") @db.ObjectId
+  userId         String           @unique
+  name           String
+  email          String           @unique
+  phone          String           @unique
+  fatherName     String
+  motherName     String
+  dob            DateTime
+  qualifications String
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  TeacherSubject TeacherSubject[]
+
+  // relational fields
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("teachers")
+}
+
+model Class {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  grade     Int
+  section   Section  @default(NA)
+  group     Group    @default(NA)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  Student Student[]
+  Subject Subject[]
+
+  @@map("classes")
+}
+
+model Subject {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  classId     String   @db.ObjectId
+  name        String
+  subjectCode String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  TeacherSubject TeacherSubject[]
+
+  // relational fields
+  class Class @relation(fields: [classId], references: [id])
+
+  @@map("subject")
+}
+
+model TeacherSubject {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  teacherId String   @db.ObjectId
+  subjectId String   @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // relational fields
+  teacher Teacher @relation(fields: [teacherId], references: [id])
+  subject Subject @relation(fields: [subjectId], references: [id])
+
+  @@map("teacherSubjects")
 }

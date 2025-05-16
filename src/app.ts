@@ -1,7 +1,12 @@
 import express, { Express, Request, Response } from 'express';
 import config from './config';
+import AppRouter from './routes';
 
 const app: Express = express();
+
+/* --------------->> Parser <<------------ */
+app.use(express.json())
+app.use(express.urlencoded())
 
 
 /* ------------> Base API <------------ */
@@ -15,5 +20,8 @@ app.get('/', (req: Request, res: Response) => {
     }
   })
 });
+
+/* ---------->> Application Router <<----------- */
+app.use('/', AppRouter)
 
 export default app;

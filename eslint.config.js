@@ -19,6 +19,12 @@ export default tseslint.config(
   {
     rules: {
       '@typescript-eslint/restrict-template-expressions': 'off',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/no-unused-vars': 'warn',
+      '@typescript-eslint/require-await': 'warn',
+      '@typescript-eslint/no-unsafe-member-access': 'false',
+      // '@typescript-eslint/no-unsafe-member-access': 'warn',
     },
   },
 );

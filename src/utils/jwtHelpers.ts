@@ -1,10 +1,10 @@
 import jwt from 'jsonwebtoken';
 import config from '../config';
-import { Role } from '@prisma/client';
+import { ROLE } from '@prisma/client';
 
 export interface ITokenPayload {
     id: string;
-    role: Role;
+    role: ROLE;
 }
 
 export const generateToken = (payload: ITokenPayload) => {

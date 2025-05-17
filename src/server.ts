@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-console */
 import app from './app';
 import config from './config';
 import seedAdmin from './utils/seedAdmin';

@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import sendResponse from '../utils/sendResponse';
 import status from 'http-status';
 import config from '../config';

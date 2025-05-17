@@ -10,13 +10,14 @@ generator client {
 /**
  * ----------> ALL ENUM HERE <----------
  */
-enum Role {
+enum ROLE {
+  SUPER_ADMIN
   ADMIN
   TEACHER
   STUDENT
 }
 
-enum Section {
+enum SECTION {
   A
   B
   C
@@ -25,7 +26,7 @@ enum Section {
   NA
 }
 
-enum Group {
+enum GROUP {
   Science
   Commerce
   Arts
@@ -39,15 +40,35 @@ enum Group {
 model User {
   id                 String   @id @map("_id")
   password           String
-  role               Role
+  role               ROLE
   hasPasswordChanged Boolean  @default(false)
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
 
   Student Student[]
   Teacher Teacher[]
+  Admin   Admin[]
 
   @@map("users")
+}
+
+model Admin {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String   @unique
+  name       String
+  email      String   @unique
+  phone      String   @unique
+  fatherName String
+  motherName String
+  dob        DateTime
+  position   String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  // relational fields
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("admins")
 }
 
 model Student {
@@ -94,8 +115,8 @@ model Class {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   name      String
   grade     Int
-  section   Section  @default(NA)
-  group     Group    @default(NA)
+  section   SECTION  @default(NA)
+  group     GROUP    @default(NA)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

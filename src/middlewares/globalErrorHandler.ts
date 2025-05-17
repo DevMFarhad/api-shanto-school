@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextFunction, Request, Response } from 'express';
 import config from '../config';
 
@@ -7,9 +9,9 @@ const globalErrorHandler = (
     res: Response,
     next: NextFunction,
 ) => {
-    let error = err?.stack;
-    let message = err.message || 'Something went wrong';
-    let statusCode = err.statusCode || 500;
+    const error = err?.stack;
+    const message = err.message || 'Something went wrong';
+    const statusCode: number = err.statusCode || 500;
 
     res.status(statusCode).json({
         success: false,

@@ -66,4 +66,29 @@ const changePassword = async (
     });
 };
 
-export const AuthServices = { loginUser, changePassword };
+/* ---------------<< Get Profile Service >>------------- */
+const myProfile = async (user: ITokenPayload) => {
+    let result;
+    if (user.role === 'ADMIN' || user.role === 'SUPER_ADMIN') {
+        result = await dbClient.admin.findUniqueOrThrow({
+            where: {
+                userId: user.id,
+            },
+        });
+    } else if (user.role === 'TEACHER') {
+        result = await dbClient.teacher.findUniqueOrThrow({
+            where: {
+                userId: user.id,
+            },
+        });
+    } else {
+        result = await dbClient.student.findUniqueOrThrow({
+            where: {
+                userId: user.id,
+            },
+        });
+    }
+    return result;
+};
+
+export const AuthServices = { loginUser, changePassword, myProfile };

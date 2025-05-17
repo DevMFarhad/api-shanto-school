@@ -11,11 +11,18 @@ router.post(
     reqBodyChecker(AuthSchema.loginUserSchema),
     AuthControllers.loginUser,
 );
+
 router.patch(
     '/change-password',
     reqBodyChecker(AuthSchema.changePasswordSchema),
     authChecker('ADMIN', 'STUDENT', 'TEACHER'),
     AuthControllers.changePassword,
+);
+
+router.get(
+    '/my-profile',
+    authChecker('ADMIN', 'STUDENT', 'TEACHER'),
+    AuthControllers.myProfile,
 );
 
 export const AuthRouter = router;

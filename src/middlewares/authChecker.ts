@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextFunction, Request, Response } from 'express';
 import { decodeToken, ITokenPayload } from '../utils/jwtHelpers';
-import { Role } from '@prisma/client';
+import { ROLE } from '@prisma/client';
 import dbClient from '../dbClient';
 import AppError from '../utils/AppError';
 import status from 'http-status';
 
-const authChecker = (...roles: Role[]) => {
+const authChecker = (...roles: ROLE[]) => {
     return async (req: Request, res: Response, next: NextFunction) => {
         try {
             // get auth header
@@ -35,7 +36,7 @@ const authChecker = (...roles: Role[]) => {
             }
 
             // check user exist
-            const existUser = await dbClient.user.findUniqueOrThrow({
+            await dbClient.user.findUniqueOrThrow({
                 where: {
                     id: tokenDecode.id,
                 },
@@ -49,7 +50,7 @@ const authChecker = (...roles: Role[]) => {
 
             next();
         } catch (error: any) {
-            throw new AppError(error?.message, status.UNAUTHORIZED);
+            throw new AppError(error?.message as string, status.UNAUTHORIZED);
         }
     };
 };

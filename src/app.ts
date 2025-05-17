@@ -1,4 +1,4 @@
-import express, { Express, Request, Response } from 'express';
+import express, { Express } from 'express';
 import AppRouter from './routes';
 import globalErrorHandler from './middlewares/globalErrorHandler';
 import notFoundHandler from './middlewares/notFoundHandler';

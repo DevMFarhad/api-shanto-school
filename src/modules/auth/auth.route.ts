@@ -6,11 +6,7 @@ import { AuthSchema } from './auth.validator';
 
 const router = Router();
 
-router.post(
-    '/login',
-    reqBodyChecker(AuthSchema.loginUserSchema),
-    AuthControllers.loginUser,
-);
+router.post('/login', reqBodyChecker(AuthSchema.loginUserSchema), AuthControllers.loginUser);
 
 router.patch(
     '/change-password',

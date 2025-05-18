@@ -12,10 +12,7 @@ const authChecker = (...roles: ROLE[]) => {
             // get auth header
             const header = req.headers.authorization;
             if (!header) {
-                throw new AppError(
-                    'Authorization header is not found',
-                    status.UNAUTHORIZED,
-                );
+                throw new AppError('Authorization header is not found', status.UNAUTHORIZED);
             }
 
             // get token
@@ -29,10 +26,7 @@ const authChecker = (...roles: ROLE[]) => {
 
             // check user role
             if (!roles.includes(tokenDecode.role)) {
-                throw new AppError(
-                    'You do not have access',
-                    status.UNAUTHORIZED,
-                );
+                throw new AppError('You do not have access', status.UNAUTHORIZED);
             }
 
             // check user exist

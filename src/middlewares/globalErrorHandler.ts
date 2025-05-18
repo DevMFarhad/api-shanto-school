@@ -3,12 +3,7 @@
 import { NextFunction, Request, Response } from 'express';
 import config from '../config';
 
-const globalErrorHandler = (
-    err: any,
-    req: Request,
-    res: Response,
-    next: NextFunction,
-) => {
+const globalErrorHandler = (err: any, req: Request, res: Response, next: NextFunction) => {
     const error = err?.stack;
     const message = err.message || 'Something went wrong';
     const statusCode: number = err.statusCode || 500;

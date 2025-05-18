@@ -12,9 +12,7 @@ const createClassSchema = z.object({
         }),
     section: z.enum(Object.values(SECTION) as [string, ...string[]]).optional(),
     group: z.enum(Object.values(GROUP) as [string, ...string[]]).optional(),
-    curriculum: z
-        .enum(Object.values(CURRICULUM) as [string, ...string[]])
-        .optional(),
+    curriculum: z.enum(Object.values(CURRICULUM) as [string, ...string[]]).optional(),
     curriculumVersion: z
         .enum(Object.values(CURRICULUM_VERSION) as [string, ...string[]])
         .optional(),

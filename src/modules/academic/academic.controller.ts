@@ -15,6 +15,19 @@ const createClass = catchAsync(async (req, res) => {
     });
 });
 
+/* -----------<< Create Class Controller >>------------ */
+const getClasses = catchAsync(async (req, res) => {
+    const query = req.query;
+    const result = await AcademicServices.getClasses(query);
+
+    sendResponse(res, {
+        message: 'Class retrieve successful',
+        data: result.data,
+        meta: result.meta,
+    });
+});
+
 export const AcademicControllers = {
     createClass,
+    getClasses,
 };

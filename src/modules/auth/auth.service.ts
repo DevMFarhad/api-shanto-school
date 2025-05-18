@@ -12,10 +12,7 @@ const loginUser = async (payload: ILoginPayload) => {
             id: payload.id,
         },
     });
-    const isMatched = await bcryptHelpers.checkPassword(
-        payload.password,
-        isUserExist.password,
-    );
+    const isMatched = await bcryptHelpers.checkPassword(payload.password, isUserExist.password);
 
     if (!isMatched) {
         throw new AppError('Password wrong.', status.UNAUTHORIZED);
@@ -32,10 +29,7 @@ const loginUser = async (payload: ILoginPayload) => {
 };
 
 /* ---------------<< Change Password Service >>------------- */
-const changePassword = async (
-    user: ITokenPayload,
-    payload: IChangePassword,
-) => {
+const changePassword = async (user: ITokenPayload, payload: IChangePassword) => {
     const existUser = await dbClient.user.findUniqueOrThrow({
         where: {
             id: user.id,
@@ -43,10 +37,7 @@ const changePassword = async (
     });
 
     // check old password matched
-    const isMatched = await bcryptHelpers.checkPassword(
-        payload.oldPassword,
-        existUser.password,
-    );
+    const isMatched = await bcryptHelpers.checkPassword(payload.oldPassword, existUser.password);
 
     if (!isMatched) {
         throw new AppError('Password wrong.', status.UNAUTHORIZED);

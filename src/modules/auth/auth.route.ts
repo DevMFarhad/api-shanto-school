@@ -15,13 +15,13 @@ router.post(
 router.patch(
     '/change-password',
     reqBodyChecker(AuthSchema.changePasswordSchema),
-    authChecker('ADMIN', 'STUDENT', 'TEACHER'),
+    authChecker('SUPER_ADMIN', 'ADMIN', 'STUDENT', 'TEACHER'),
     AuthControllers.changePassword,
 );
 
 router.get(
     '/my-profile',
-    authChecker('ADMIN', 'STUDENT', 'TEACHER'),
+    authChecker('SUPER_ADMIN', 'ADMIN', 'STUDENT', 'TEACHER'),
     AuthControllers.myProfile,
 );
 

@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { AuthRouter } from '../modules/auth/auth.route';
 import baseAPI from './baseAPI';
+import { AcademicRoutes } from '../modules/academic/academic.route';
 
 interface IRouter {
     router: Router;
@@ -17,6 +18,10 @@ const appRoutes: IRouter[] = [
     {
         router: AuthRouter,
         path: '/auth',
+    },
+    {
+        router: AcademicRoutes,
+        path: '/academic',
     },
 ];
 

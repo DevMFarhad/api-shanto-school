@@ -18,6 +18,24 @@ const createClassSchema = z.object({
         .optional(),
 });
 
-export const AcademicSchemas = {
+const updateClassSchema = z.object({
+    grade: z
+        .number({
+            invalid_type_error: 'Grade must be a integer value',
+        })
+        .int({
+            message: 'Grade must be a integer value',
+        })
+        .optional(),
+    section: z.enum(Object.values(SECTION) as [string, ...string[]]).optional(),
+    group: z.enum(Object.values(GROUP) as [string, ...string[]]).optional(),
+    curriculum: z.enum(Object.values(CURRICULUM) as [string, ...string[]]).optional(),
+    curriculumVersion: z
+        .enum(Object.values(CURRICULUM_VERSION) as [string, ...string[]])
+        .optional(),
+});
+
+export const ClassSchemas = {
     createClassSchema,
+    updateClassSchema,
 };

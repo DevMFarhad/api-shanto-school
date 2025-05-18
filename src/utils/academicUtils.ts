@@ -1,4 +1,4 @@
-import { ICreateClass } from '../modules/academic/academic.type';
+import { ICreateClass } from '../modules/class/class.type';
 
 export const generateClassName = (payload: ICreateClass) => {
     const group = payload.group !== 'NA' ? `-${payload.group}` : '';
